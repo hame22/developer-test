@@ -4,7 +4,7 @@ import * as fs from "fs";
 import * as jade from "jade";
 import * as path from "path";
 import * as React from "react";
-import {default as list} from "./components/list.jsx"
+import {default as list} from "./components/list.jsx";
 
 export let app = new Express();
 
@@ -22,6 +22,19 @@ let locals = {
   locals.content = React.renderToString(React.createFactory(list)(locals.props));
   res.render('layout', locals);
 });
+
+app.get('/api/:file', (req, res) => {
+	let path = __dirname + '/api/' + req.params.file + '.json';
+	fs.readFile(path, 'utf8', (error, data) => {
+		try {
+			res.json(JSON.parse(data));
+        } catch (e) {
+            res.send(404);
+        }
+	});
+});
+
+
 
 app.listen(1919);
 
