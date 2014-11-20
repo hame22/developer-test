@@ -4,9 +4,10 @@ import * as fs from "fs";
 import * as jade from "jade";
 import * as path from "path";
 import * as React from "react";
+import * as request from "superagent";
 import {default as list} from "./components/list.jsx";
 
-export let app = new Express();
+let app = new Express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -14,13 +15,16 @@ app.set('view engine', 'jade');
 app.use(Express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res, next) => {
-let locals = {
-    props: {
-      state: {text: "hello world", items: ['item1', 'item2']}
-    }
-  };
-  locals.content = React.renderToString(React.createFactory(list)(locals.props));
-  res.render('layout', locals);
+
+	request.get('http://127.0.0.1:1919/api/data').end((error, response) => {
+		let locals = {
+			props: {
+				listItems: response.body
+			}
+		};
+		locals.content = React.renderToString(React.createFactory(list)(locals.props));
+		res.render('layout', locals);
+	});
 });
 
 app.get('/api/:file', (req, res) => {
