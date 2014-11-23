@@ -1,0 +1,31 @@
+
+@import "base/normalize";
+@import "base/variables";
+
+#content {
+  @include outer-container();
+}
+
+@include media($small) {
+  #content{
+     width: $bp2;
+  }
+}
+
+@include media($medium) {
+  #content{
+     width: $bp3;
+  }
+}
+
+@include media($large) {
+  #content{
+     width: $bp4;
+  }
+}
+
+@include media($xlarge) {
+  #content{
+     width: $bp5;
+  }
+}

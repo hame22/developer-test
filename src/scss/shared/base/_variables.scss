@@ -1,0 +1,28 @@
+@import "bourbon";
+@import "neat";
+
+
+//Width Variables
+$bp1: 20em;
+$bp2: 30em;
+$bp3: 47.5em;
+$bp4: 62.5em;
+$bp5: 75em;
+
+/////////////////////////////////
+//Breakpoint variables - using em's as they support zoom arguments for new-breakpoint(query, width, columns);
+/////////////////////////////////
+// Mobile portrait
+$xsmall: new-breakpoint(min-width $bp1 4); //approx 320px
+
+// Mobile landscape
+$small: new-breakpoint(min-width $bp2 8); //approx 480px
+
+//Tablet Portrait
+$medium: new-breakpoint(min-width $bp3 12); //approx 760px
+
+//Tablet Landscape
+$large: new-breakpoint(min-width $bp4 12); //approx 1000px
+
+//Desktop
+$xlarge: new-breakpoint(min-width $bp5 20); //approx 1200px
